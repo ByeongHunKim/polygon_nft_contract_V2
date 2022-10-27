@@ -1,3 +1,5 @@
+remixd -s ./ --remix-ide https://remix.ethereum.org
+
 # 확률에 대한 부분
 
 ## solidity
@@ -7,6 +9,7 @@
 - 그렇지않으면 baseURI 사용
 
 ### 그런데 어떻게 이 처리를 해야할 지 모르겠음.
+- 10월 27일 목요일 해결을 하긴 했음 근데 지금 문제는 일반등급 민팅 될 확률이 매우 큰데, tokenId값이 5가 넘어가는 순간부터 당첨이 되어도 해당 URI값을 참조할 수 없다는 문제
 
 ## front(react)
 
@@ -30,3 +33,4 @@
 - 3번과 동일한 고민임
 
 ## 랜덤함수 internal로 해야하지 않나?
+- internal로 적용
