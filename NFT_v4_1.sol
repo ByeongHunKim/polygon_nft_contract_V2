@@ -17,6 +17,8 @@ contract NFT is ERC721Enumerable, Ownable {
 
     mapping (uint256 => uint256) public tokenMetadataNo;
 
+    event result(uint256 tokenId, uint256 randomNum, bool success);
+
     constructor(string memory _name, string memory _symbol) ERC721(_name, _symbol){}
 
     // internal
@@ -26,7 +28,7 @@ contract NFT is ERC721Enumerable, Ownable {
     }
 
     // public
-    function mint(address _to, uint256 _mintAmount) public payable 
+    function mint(address _to, uint256 _mintAmount) public payable returns(string memory)
     {
         uint256 supply = totalSupply();
         require(!paused, "minting is disabled");
@@ -34,11 +36,12 @@ contract NFT is ERC721Enumerable, Ownable {
         require(_mintAmount <= maxMintAmount, "you can't mint more than maxAmount");
         require(supply + _mintAmount <= maxSupply, "every NFTs are already minted");
         require(msg.value >= cost * _mintAmount, "you have to pay exact cost");
-
+        
         uint256 randomNumber = getRandomNumber(_to, maxSupply);
         uint256 tokenId = supply + _mintAmount;
         tokenMetadataNo[tokenId] = randomNumber;
         _safeMint(_to, tokenId);
+        emit result(tokenId, randomNumber, true);
     }
 
     function walletOfOwner(address _owner) public view returns (uint256[] memory)
